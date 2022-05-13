@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class GetBeerDto {
+	private Long id;
 	private LocalDateTime createdAt;
 	private String name;
 	private List<Ingredient> ingredients;

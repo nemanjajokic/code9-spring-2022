@@ -22,6 +22,6 @@ public class BeerMapper {
 	}
 
 	public static GetBeerDto mapBeerToGetBeerDto(final Beer beer) {
-		return new GetBeerDto(beer.getCreatedAt(), beer.getName(), beer.getIngredients());
+		return new GetBeerDto(beer.getId(),beer.getCreatedAt(), beer.getName(), beer.getIngredients());
 	}
 }

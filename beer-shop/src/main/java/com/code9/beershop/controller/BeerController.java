@@ -20,11 +20,11 @@ import com.code9.beershop.service.DesignBeerService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/design")
+@RequestMapping("/beers")
 @RequiredArgsConstructor
 @Validated
 @CrossOrigin(origins = "http://localhost:4200")
-public class DesignBeerController {
+public class BeerController {
 
 	// http://localhost:8080/swagger-ui.html
 	private final DesignBeerService designBeerService;
