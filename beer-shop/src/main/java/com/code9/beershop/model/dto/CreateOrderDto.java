@@ -8,8 +8,6 @@ import lombok.Data;
 @Data
 public class CreateOrderDto {
 	@NotEmpty
-	private LocalDateTime placedAt;
-	@NotEmpty
 	private String name;
 	@NotEmpty
 	private String street;
