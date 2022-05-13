@@ -1,4 +1,4 @@
-package com.code9.beershop.model;
+package com.code9.beershop.model.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,30 +18,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="beer_order")
-public class Order {
+public class Beer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private LocalDateTime placedAt = LocalDateTime.now();
+	private LocalDateTime createdAt;
 
 	private String name;
+	@ManyToMany(targetEntity = Ingredient.class)
+	private List<Ingredient> ingredients;
 
-	private String street;
+	@PrePersist
+	void createdAt() {
+		this.createdAt = LocalDateTime.now();
+	}
 
-	private String city;
-
-	private String state;
-
-	private String zip;
-
-	private String creditCardNumber;
-
-	private String creditCardExpiration;
-
-	private String creditCardSecurityCode;
-	@ManyToMany(targetEntity = Beer.class)
-	private List<Beer> beers;
-
+	public Beer(final String name, final List<Ingredient> ingredients) {
+		this.name = name;
+		this.ingredients = ingredients;
+	}
 }
