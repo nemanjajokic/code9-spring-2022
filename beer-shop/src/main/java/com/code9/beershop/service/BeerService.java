@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class DesignBeerService {
+public class BeerService {
 
 	private final BeerRepository beerRepository;
 	private final IngredientRepository ingredientRepository;
@@ -31,10 +31,11 @@ public class DesignBeerService {
 		return BeerMapper.mapBeerToGetBeerDto(beer);
 	}
 
-	public Beer saveBeer(final CreateBeerDto createBeerDto) {
+	public GetBeerDto saveBeer(final CreateBeerDto createBeerDto) {
 		List<Ingredient> ingredients = ingredientRepository.findByIdIn(createBeerDto.getIngredientIds());
 		Beer beer=BeerMapper.mapCreateBeerDtoToBeer(createBeerDto, ingredients);
-		return beerRepository.save(beer);
+		Beer storedBeer= beerRepository.save(beer);
+		return BeerMapper.mapBeerToGetBeerDto(storedBeer);
 	}
 
 }

@@ -1,28 +1,31 @@
 package com.code9.beershop.model.dto;
 
-import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateOrderDto {
-	@NotEmpty
+	@NotEmpty(message = "Name must not be empty.")
 	private String name;
-	@NotEmpty
+	@NotEmpty(message = "Street must not be empty.")
 	private String street;
-	@NotEmpty
+	@NotEmpty(message = "City must not be empty.")
 	private String city;
-	@NotEmpty
+	@NotEmpty(message = "State must not be empty.")
 	private String state;
-	@NotEmpty
+	@NotEmpty(message = "Zip must not be empty.")
 	private String zip;
-	@NotEmpty
+	@NotEmpty(message = "Credit card number must not be empty.")
 	private String creditCardNumber;
-	@NotEmpty
+	@NotEmpty(message = "Credit card expiration must not be empty.")
 	private String creditCardExpiration;
-	@NotEmpty
+	@NotEmpty(message = "Credit card security code must not be empty.")
 	private String creditCardSecurityCode;
-	@NotNull
+	@NotNull(message = "Beer id must not be null.")
 	private Long beerId;
 }

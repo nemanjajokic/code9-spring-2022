@@ -2,6 +2,7 @@ package com.code9.beershop.controller;
 
 import java.util.List;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +17,7 @@ import com.code9.beershop.exception.NotFoundException;
 import com.code9.beershop.model.dto.CreateBeerDto;
 import com.code9.beershop.model.dto.GetBeerDto;
 import com.code9.beershop.model.entity.Beer;
-import com.code9.beershop.service.DesignBeerService;
+import com.code9.beershop.service.BeerService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,27 +26,25 @@ import lombok.RequiredArgsConstructor;
 @Validated
 @CrossOrigin(origins = "http://localhost:4200")
 public class BeerController {
-
-	// http://localhost:8080/swagger-ui.html
-	private final DesignBeerService designBeerService;
+	private final BeerService beerService;
 
 	@GetMapping
 	public List<GetBeerDto> getAllBeers() {
-		return designBeerService.getAllBeers();
+		return beerService.getAllBeers();
 	}
 
 	@GetMapping("/{id}")
-	public GetBeerDto getBeerById(@PathVariable("id") final Long id) {
+	public GetBeerDto getBeerById(@NotEmpty @PathVariable("id") final Long id) {
 		try {
-			return designBeerService.getBeerById(id);
+			return beerService.getBeerById(id);
 		} catch (NotFoundException ex) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Design not found", ex);
 		}
 	}
 
 	@PostMapping
-	public Beer saveBeer(@Valid @RequestBody final CreateBeerDto beerDto) {
-		return designBeerService.saveBeer(beerDto);
+	public GetBeerDto saveBeer(@Valid @RequestBody final CreateBeerDto beerDto) {
+		return beerService.saveBeer(beerDto);
 	}
 
 }
